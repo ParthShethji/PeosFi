@@ -97,7 +97,7 @@ export default function Profile({ params }: { params: { address: string } }) {
 
   const allBorrows = [
     {
-      address: "0x674dc72D0738D2f905aE9F3ef17C0384c8bd28d2",
+      address: "0xdd028D77462a0dc7e58413cD4E13d4Ce2BD702A0",
       borrows: [
         {
           address: "0x674dc72D0738D2f905aE9F3ef17C0384c8bd28d2",
@@ -186,6 +186,8 @@ export default function Profile({ params }: { params: { address: string } }) {
     setMyRequestedBorrows(myBorrows?.requestedBorrows);
     setMyPreviousBorrows(myBorrows?.previousBorrows);
   }, [params.address]);
+
+  
 
   const trusters = [
     {
@@ -598,6 +600,7 @@ export default function Profile({ params }: { params: { address: string } }) {
                 )}
               </Dialog>
             ))}
+            
           </div>
 
           <div className="">
