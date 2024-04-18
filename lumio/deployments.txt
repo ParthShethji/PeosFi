@@ -1,0 +1,8 @@
+Token deployed at:  0x7fbfC3055e0253300bE1F654C62e32ec412b80F8
+ZeroFiP2PLending deployed at:  0x0D99a888be084BaC9fAb4C9a920599CAA7789635
+ZeroFiSocialPool deployed at:  0x7A46b3E1840Cb018918664AaC170CE4bb9B5CC60
+
+# Command to run
+forge script script/Lend.s.sol --private-key=<PRIVATE_KEY> --rpc-url https://testnet.lumio.io --broadcast
+
+https://docs.lumio.io/xlumio-guides/deploy-on-evm-foundry

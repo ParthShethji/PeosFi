@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Workbench&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    /* --bg: #100c17a2; */
+    /* --bg: #f3f4f6; */
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* body {
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(37, 14, 45, 1) 0%,
+    rgba(19, 17, 28, 1) 100%
+    );
+  } */
+  body {
+    background-color: #000; /* Black background color */
+  
+    /* Define two radial gradients with different positions */
+    background-image:
+      radial-gradient(circle at center, #8B93FF, transparent 500px),
+      radial-gradient(circle at center, #FF71CD, transparent 500px);
+  
+    /* Apply background position for each gradient */
+    background-position:
+      left 150px top 150px, /* Position for the first gradient */
+      right 150px bottom 150px; /* Position for the second gradient */
+  
+    /* Smooth transition for background position */
+    transition: background-position 0.5s ease-in-out;
+  
+    /* Animation for moving the circles */
+    animation: moveCircle 5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes moveCircle {
+    0% {
+      /* Initial position */
+      background-position: left 300px top 0px, right 300px bottom 0px;
+    }
+    50% {
+      background-position: left 250px top 150px, right 250px bottom 150px;
+    }
+    100% {
+      /* Return to the initial position */
+      background-position: left 500px top 500px, right 500px bottom 500px;
+    }
+  }
+  
+
+html,
+body {
+  min-height: 100dvh;
+}
+
+.glass {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+div.ju367v1k:nth-child(1) > div:nth-child(1) {
+  display: none;
+}
+
+.test > div > button > div:nth-child(1) {
+  display: none;
+}
+
+div.ju367v4:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
