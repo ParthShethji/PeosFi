@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import QRCode from 'react-qr-code';
-import axios from 'axios';
 import { Reclaim } from '@reclaimprotocol/js-sdk';
 
 interface GlassCardProps {
   onClose: () => void;
+  onSuccess: () => void;
 }
 
-const GlassCard: React.FC<GlassCardProps> = ({ onClose }) => {
+const GlassCard: React.FC<GlassCardProps> = ({ onClose, onSuccess }) => {
   const [url, setUrl] = useState('');
   const [statusUrl, setStatusUrl] = useState('');
 
@@ -42,8 +42,9 @@ const GlassCard: React.FC<GlassCardProps> = ({ onClose }) => {
     await reclaimClient.startSession({
       onSuccessCallback: proof => {
         console.log('Verification success', proof);
-        const data = proof.claimData.context.extractedParameters;
+        const data = proof;
         console.log(data);
+        onSuccess();
       },
       onFailureCallback: error => {
         console.error('Verification failed', error);
@@ -65,7 +66,7 @@ const GlassCard: React.FC<GlassCardProps> = ({ onClose }) => {
               </button>
             )}
             {url && (
-              <QRCode value={url} size={160} />
+              <QRCode value={url} size={160}/>
             )}
           </div>
           <button

@@ -61,8 +61,8 @@
   
     /* Define two radial gradients with different positions */
     background-image:
-      radial-gradient(circle at center, #8B93FF, transparent 500px),
-      radial-gradient(circle at center, #FF71CD, transparent 500px);
+      radial-gradient(circle at center, #8B93FF, transparent 340px),
+      radial-gradient(circle at center, #FF71CD, transparent 340px);
   
     /* Apply background position for each gradient */
     background-position:
@@ -118,4 +118,9 @@ div.ju367v4:nth-child(2) {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.toast-success {
+  background-color: #28a745;
+  color: white;
 }

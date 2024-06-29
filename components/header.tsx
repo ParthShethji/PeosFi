@@ -14,9 +14,11 @@ import Address from "./ui/address";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+// import { useToast } from "./ui/use-toast";
 import { useToast } from "./ui/use-toast";
 import GlassCard from "./ui/reclaimCard";
 import Logo from "./logo";
+import { Toaster } from "@/components/ui/toaster";
 import { useAccount } from "wagmi";
 import { useEffect, useRef } from "react";
 export default function Header() {
@@ -41,11 +43,23 @@ export default function Header() {
   // }
   const [showCard, setShowCard] = useState(false);
   const [connectWallet, setConnectWallet] = useState(false);
+  const { toast } = useToast(); // Use the toast hook
   const openCard = () => setShowCard(true);
   const closeCard = () => {
     setShowCard(false);
     setConnectWallet(true);
   };
+
+  const handleSuccess = () => {
+    closeCard();
+    toast({
+      title: "Verification Successful",
+      description: "Your verification was successful.",
+      // status: "success",
+      className: "toast-success"
+    });
+  };
+
   const clickhandle = () => {
     openCard();
     isInitialRender.current = false;
@@ -115,14 +129,14 @@ export default function Header() {
         </div>
       </Button> */}
         <div>
-      {showCard && <GlassCard onClose={closeCard} />}
+      {showCard && <GlassCard onClose={closeCard} onSuccess={handleSuccess} />}
       <Button variant="link">
         <div className="test" onClick={() => clickhandle()}>
           <ConnectButton />
         </div>
       </Button>
     </div>
-
+    <Toaster />
     </div>
   );
 }
