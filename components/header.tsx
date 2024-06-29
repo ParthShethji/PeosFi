@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import React, { useState } from 'react';
 import { ChevronDown, Loader2 } from "lucide-react";
 import {
   DropdownMenu,
@@ -14,6 +15,7 @@ import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useToast } from "./ui/use-toast";
+import GlassCard from "./ui/reclaimCard";
 import Logo from "./logo";
 import { useAccount } from "wagmi";
 import { useEffect, useRef } from "react";
@@ -37,7 +39,15 @@ export default function Header() {
   //   isInitialRender.current = true;
   
   // }
+  const [showCard, setShowCard] = useState(false);
+  const [connectWallet, setConnectWallet] = useState(false);
+  const openCard = () => setShowCard(true);
+  const closeCard = () => {
+    setShowCard(false);
+    setConnectWallet(true);
+  };
   const clickhandle = () => {
+    openCard();
     isInitialRender.current = false;
   }
   useEffect(() => {
@@ -99,11 +109,20 @@ export default function Header() {
         </Button>
       </div>
 
+      {/* <Button variant="link">
+        <div className="test" onClick={() => clickhandle()}>
+          <ConnectButton />
+        </div>
+      </Button> */}
+        <div>
+      {showCard && <GlassCard onClose={closeCard} />}
       <Button variant="link">
         <div className="test" onClick={() => clickhandle()}>
           <ConnectButton />
         </div>
       </Button>
+    </div>
+
     </div>
   );
 }
