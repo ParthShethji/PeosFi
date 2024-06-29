@@ -13,7 +13,7 @@ import {
 } from "../ui/select";
 import { socialABI, socialPool, p2pLending, p2pABI } from "@/lib/utils";
 import { getEthersSigner } from "@/lib/signer";
-import { Contract } from "ethers";
+import { ethers, Contract } from "ethers";
 import {
   Dialog,
   DialogContent,
@@ -63,40 +63,88 @@ export default function BorrowWidget({
   // });
   // const { write } = useContractWrite(config);
 
+  // async function borrow() {
+  //   try {
+  //     setLoanTxLoading(true);
+  //     const signer = await getEthersSigner();
+  //     if (!signer || !address) return;
+  //     const chainId = signer.provider._network.chainId;
+  //     const currentChainInfos = getChainInfo(chainId);
+  //     console.log({ signer, chainId, currentChainInfos });
+
+  //     const contract = new Contract(currentChainInfos.pool, socialABI, signer);
+  //     const authorizedAmount = Math.min(parseFloat(score), Number(amount));
+  //     const amountInWei = BigInt(Number(authorizedAmount) * 10 ** 18);
+  //     const nowInSec = Math.floor(Date.now() / 1000);
+  //     const durationInSec = Number(duration) * 24 * 60 * 60;
+  //     const limitRepayDate = nowInSec + durationInSec;
+  //     const loanTerms = [
+  //       address,
+  //       amountInWei,
+  //       INTEREST_RATE.scNumber,
+  //       limitRepayDate,
+  //     ];
+  //     const apiSignature = "0x";
+  //     const apiNonce = 123;
+  //     const tx = await contract.borrow(loanTerms, apiSignature, apiNonce, {
+  //       gasLimit: 5000000,
+  //     });
+  //     console.log({ tx });
+  //     await new Promise((resolve) => setTimeout(resolve, 5000));
+  //     // const txResponse = await signer.sendTransaction(tx);
+  //     // console.log({ txResponse });
+  //     setLoanTxSuccess(true);
+  //     setIsLoanDisplayed(true);
+  //   } catch (error) {
+  //     console.error(error);
+  //   } finally {
+  //     setLoanTxLoading(false);
+  //   }
+  // }
+
   async function borrow() {
     try {
       setLoanTxLoading(true);
       const signer = await getEthersSigner();
       if (!signer || !address) return;
-      const chainId = signer.provider._network.chainId;
+      const chainId = await signer.getChainId();
       const currentChainInfos = getChainInfo(chainId);
-      console.log({ signer, chainId, currentChainInfos });
-
+  
       const contract = new Contract(currentChainInfos.pool, socialABI, signer);
-      const authorizedAmount = Math.min(parseFloat(score), Number(amount));
-      const amountInWei = BigInt(Number(authorizedAmount) * 10 ** 18);
+      
+      // Use a fixed amount for testing
+      const amountInWei = ethers.utils.parseUnits("100", 18); // Assuming 18 decimals
+      
       const nowInSec = Math.floor(Date.now() / 1000);
-      const durationInSec = Number(duration) * 24 * 60 * 60;
+      const durationInSec = 30 * 24 * 60 * 60; // 30 days
       const limitRepayDate = nowInSec + durationInSec;
+      
+      // Dummy interest rate (20% APR in Ray format)
+      const dummyInterestRate = "63419583967529180000000000";
+  
       const loanTerms = [
         address,
         amountInWei,
-        INTEREST_RATE.scNumber,
+        dummyInterestRate,
         limitRepayDate,
       ];
-      const apiSignature = "0x";
-      const apiNonce = 123;
+  
+      // Dummy values for testing
+      const apiSignature = "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef00";
+      const apiNonce = 12345;
+  
       const tx = await contract.borrow(loanTerms, apiSignature, apiNonce, {
-        gasLimit: 5000000,
+        gasLimit: 500000, // Reduced gas limit for testing
       });
-      console.log({ tx });
-      await new Promise((resolve) => setTimeout(resolve, 5000));
-      // const txResponse = await signer.sendTransaction(tx);
-      // console.log({ txResponse });
+  
+      console.log("Transaction sent:", tx.hash);
+      await tx.wait();
+      console.log("Transaction confirmed");
+  
       setLoanTxSuccess(true);
       setIsLoanDisplayed(true);
     } catch (error) {
-      console.error(error);
+      console.error("Borrow error:", error);
     } finally {
       setLoanTxLoading(false);
     }

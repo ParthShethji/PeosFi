@@ -1,5 +1,7 @@
 console.log("credit score");
- 
+// Add recliam providers to calculate followers of different social media platforms
+// Return a random number between 1 and 100 if recliam provider is not active
+
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getCreditLine } from "./server/getCreditLine";
 import {
