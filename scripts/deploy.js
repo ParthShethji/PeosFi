@@ -4,7 +4,6 @@ async function deployContracts() {
   // Compile all the contracts
   const Contract1 = await ethers.getContractFactory("ZeroFiSocialPool");
   const Contract2 = await ethers.getContractFactory("ZeroFiSocialPool");
-  // Add more contract factories as needed for additional contracts
   
   // Deploy each contract
   console.log("Deploying Contract1...");
@@ -18,9 +17,7 @@ async function deployContracts() {
   console.log("Contract2 deployed to:", contract2.address);
   
   // Deploy more contracts as needed
-  
-  // Optionally, you can interact with the deployed contracts here
-}
+  }
 
 deployContracts()
   .then(() => process.exit(0))
