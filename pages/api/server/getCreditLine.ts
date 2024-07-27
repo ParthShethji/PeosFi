@@ -3,10 +3,12 @@ import { getTotalValueFollowers } from "./getTotalValueFollowers";
 
 const RATIO_TVF_CREDIT_LINE = 0.02;
 const RATIO_FEES_CREDIT_LINE = 0.1;
-const ETH_PRICE = 1500; // TODO add a cache to get the price from the last 5 minutes
+const RATIO_REPUTATION_SCORE = 0.5; 
+const RATIO_OTHER_METRIC = 0.38; 
+const ETH_PRICE = 3400; // TODO add a cache to get the price from the last 5 minutes
 
 export const getCreditLine = async (address: string): Promise<number> => {
-  const reputationScore = 1; // TODO
+  const reputationScore = 1; 
   console.log({ address });
   const totalValueFollowers = await getTotalValueFollowers(address);
   console.log({ totalValueFollowers });

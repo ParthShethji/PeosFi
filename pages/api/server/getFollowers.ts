@@ -4,6 +4,7 @@ import "dotenv/config";
 export const getFollowers = async (address) => {
   try {
     const AIRSTACK_API_KEY = process.env.AIRSTACK_API_KEY;
+    
     if (!AIRSTACK_API_KEY)
       throw new Error("No AIRSTACK_API_KEY environment variable found.");
     const query = JSON.stringify({
@@ -42,3 +43,4 @@ export const getFollowers = async (address) => {
     return ["0x31304ccdd28e62ef552824db08a350d752068c39"]; // TODO remove this
   }
 };
+

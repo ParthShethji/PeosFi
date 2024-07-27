@@ -36,12 +36,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useToast } from "@/components/ui/use-toast";
+import Glass from "../../../components/ui/twitterCard"
 import { getUserOnChainData } from "@/lib/next-id";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAccount } from "wagmi";
 import { LensPost } from "@/components/LensPost";
 export default function Profile({ params }: { params: { address: string } }) {
@@ -238,6 +239,30 @@ export default function Profile({ params }: { params: { address: string } }) {
       });
     }
   };
+
+  const isInitialRender = useRef(true);
+  const [showCard, setShowCard] = useState(false);
+  const [connectWallet, setConnectWallet] = useState(false);
+  const openCard = () => setShowCard(true);
+  const closeCard = () => {
+    setShowCard(false);
+    setConnectWallet(true);
+  };
+
+  const handleSuccess = () => {
+    closeCard();
+    toast({
+      title: "Verification Successful",
+      description: "Your verification was successful.",
+      // status: "success",
+      className: "toast-success"
+    });
+  };
+
+  const clickhandle = () => {
+    openCard();
+    isInitialRender.current = false;
+  }
 
   return (
     <LensProvider config={lensConfig}>
@@ -536,9 +561,18 @@ export default function Profile({ params }: { params: { address: string } }) {
                   </div>
                 )}
                 {profile && profile?.neighbors.length === 0 && (
-                  <p className="text-xs text-center text-white">
-                    No social identities
-                  </p>
+                  // <p className="text-xs text-center text-white">
+                  //   No social identities
+                  // </p>
+                  <div className="flex justify-center">
+                          {showCard && <Glass onClose={closeCard} onSuccess={handleSuccess} />}
+
+                      <button
+                        className="cursor-pointer border-none px-5 py-2 rounded-md w-fit mx-auto bg-white mt-5 hover:opacity-80 transition" onClick={clickhandle}
+                      >
+                        Connect With Reclaim
+                      </button>;
+                </div>
                 )}
               </TabsContent>
             </Tabs>

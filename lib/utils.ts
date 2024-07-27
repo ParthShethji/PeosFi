@@ -42,7 +42,7 @@ export const contractChains = [
     chainId: 11155111,
     token: "0x27fa57Ee81c091e71D7B12416C72EfF2A2cc70f2",
     p2p: "0xA9976E07C1e2882533e14e57E6C480A1Df555E18",
-    pool: "0x28E40418E9af801B639491B1a15eC20135b8DeAB",
+    pool: "0x105c1609e94295dC3A49aD98223f8FeFccE1A3DB",
   },
   {
     chainName: "baseGoerli",
