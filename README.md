@@ -54,7 +54,8 @@ To get started with PeosFi, follow these steps:
     ```
 
 
-### Here are some of the images of our Product 
+### Images of Our Product
+
 ![alt text](./public/readme_img/land.png) 
 
 ![alt text](./public/readme_img/loan.png)
@@ -64,6 +65,6 @@ To get started with PeosFi, follow these steps:
 ![alt text](./public/readme_img/social.png) 
 
 
-## Link to our Youtube Video
+## Youtube Video
 
 ### https://youtu.be/m41FjtYPVBQ
