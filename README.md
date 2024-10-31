@@ -67,4 +67,4 @@ To get started with PeosFi, follow these steps:
 
 ## Youtube Video
 
-### https://youtu.be/m41FjtYPVBQ
+### [https://youtu.be/m41FjtYPVBQ](https://youtu.be/6yVZwUmD_mY)
