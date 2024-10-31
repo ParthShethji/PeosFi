@@ -245,12 +245,12 @@ export default function Profile({ params }: { params: { address: string } }) {
   const [connectWallet, setConnectWallet] = useState(false);
   const openCard = () => setShowCard(true);
   const closeCard = () => {
-    setShowCard(false);
+    // setShowCard(false);
     setConnectWallet(true);
   };
 
   const handleSuccess = () => {
-    closeCard();
+    // closeCard();
     toast({
       title: "Verification Successful",
       description: "Your verification was successful.",

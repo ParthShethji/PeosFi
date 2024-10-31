@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 // import { useToast } from "./ui/use-toast";
 import { useToast } from "./ui/use-toast";
-import GlassCard from "./ui/reclaimCard";
+import GlassCard from "./ui/reclaimCard.jsx";
 import Logo from "./logo";
 import { Toaster } from "@/components/ui/toaster";
 import { useAccount } from "wagmi";
@@ -46,18 +46,22 @@ export default function Header() {
   const { toast } = useToast(); // Use the toast hook
   const openCard = () => setShowCard(true);
   const closeCard = () => {
-    setShowCard(false);
+    // setShowCard(false);
     setConnectWallet(true);
   };
 
-  const handleSuccess = () => {
-    closeCard();
+  const handleSuccess = (proofs) => {
+    // closeCard();
     toast({
       title: "Verification Successful",
-      description: "Your verification was successful.",
-      // status: "success",
+      description: `Email Id: ${proofs.response[0].claimData.extractedParameters.email}`,
       className: "toast-success"
     });
+    
+    // You can handle the proof data here
+    console.log("Verification proofs:", proofs);
+    
+    // Optionally store the proof data or update the user's profile
   };
 
   const clickhandle = () => {
